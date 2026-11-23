@@ -44,7 +44,7 @@ Python 3.12 · ChromaDB · Ollama (`all-minilm` pour les embeddings, `llama3.2:3
 ## Installation
 
 ```bash
-git clone <url-du-depot> alert-to-patch && cd alert-to-patch
+git clone https://github.com/hamzus17/HAKATSKI.git alert-to-patch && cd alert-to-patch
 python -m venv .venv
 source .venv/Scripts/activate      # Linux/macOS : source .venv/bin/activate
 pip install chromadb httpx
