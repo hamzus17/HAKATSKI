@@ -32,7 +32,7 @@ Cible (Juice Shop) → ZAP → alertes.json
 ```
 ## Architecture du pipeline
 
-![Architecture DevSecOps](./data/architecture.jpg)
+![Architecture DevSecOps](alert-to-patch/data/architecture.jfif)
 ```
 
 ### Rôle des étapes
