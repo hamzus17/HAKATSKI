@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HAKATSUKI — Security Intelligence</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="cloud-mark">暁</div><div><div class="brand-name">HAKATSUKI</div><div class="brand-sub">ALERT → PATCH</div></div></div>
+    <div class="side-label">OPERATIONS</div>
+    <button class="nav active" data-view="overview"><span>◈</span> Dashboard</button>
+    <button class="nav" data-view="vulnerabilities"><span>⌁</span> Vulnérabilités</button>
+    <button class="nav" data-view="assistant"><span>✳</span> IA Assistant</button>
+    <button class="nav" data-view="knowledge"><span>⌕</span> Base OWASP</button>
+    <div class="side-bottom"><div class="local-pill"><i></i> LOCAL INSTANCE</div><div class="side-foot">ALERT <b>→</b> PATCH<br><small>Defensive security workspace</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow">SECURITY OPERATIONS / LOCAL ENVIRONMENT</div><h1 id="pageTitle">Dashboard</h1></div><div class="top-right"><span class="live-dot"></span><span id="sysState" class="sys-state">Vérification…</span><span id="lastUpdated">Synchronisation…</span><button class="icon-btn" id="refreshBtn" title="Actualiser">↻</button></div></header>
+    <section id="overviewView" class="view">
+      <div class="hero"><div class="hero-content"><div class="hero-kicker">忍 · DEFEND / DETECT / REMEDIATE</div><h2>Bienvenue sur <em>HAKATSUKI</em></h2><p>Votre centre de sécurité intelligent : scan, analyse IA et correctifs, en local.</p><blockquote class="hero-quote">« Comprendre la menace, pour mieux la vaincre. »</blockquote><div class="hero-actions"><button class="primary" id="scanBtn">▶ &nbsp; LANCER UN SCAN LOCAL</button><span class="scope-note">Cible autorisée : localhost:3000</span></div></div><div class="hero-symbol"><div class="ring ring-a"></div><div class="ring ring-b"></div><div class="eye">暁</div><div class="symbol-caption">AKATSUKI PROTOCOL</div></div></div>
+      <div class="section-head"><div><div class="eyebrow">SCAN INTELLIGENCE</div><h3>Vulnerability overview</h3></div><span class="data-source">SOURCE : output/alertes.json</span></div>
+      <div class="stats-grid">
+        <article class="stat-card total"><div class="stat-label">VULNÉRABILITÉS TOTALES</div><div class="stat-value" id="totalCount">—</div><div class="stat-foot">Alertes dans le dernier fichier JSON</div></article>
+        <article class="stat-card critical"><div class="stat-label">CRITIQUES</div><div class="stat-value" id="criticalCount">—</div><div class="stat-foot">Priorité immédiate</div></article>
+        <article class="stat-card high"><div class="stat-label">ÉLEVÉES</div><div class="stat-value" id="highCount">—</div><div class="stat-foot">Risque élevé</div></article>
+        <article class="stat-card medium"><div class="stat-label">MOYENNES</div><div class="stat-value" id="mediumCount">—</div><div class="stat-foot">À traiter</div></article>
+        <article class="stat-card low"><div class="stat-label">FAIBLES</div><div class="stat-value" id="lowCount">—</div><div class="stat-foot">Risque faible</div></article>
+      </div>
+      <div class="content-grid"><section class="panel"><div class="panel-head"><div><div class="eyebrow">SCAN</div><h3>Dernier scan</h3></div><span class="mini-tag">LIVE JSON</span></div><div id="lastScan" class="last-scan">—</div><div class="donut-row"><div id="donut" class="donut"></div><div id="donutLegend" class="donut-legend"></div></div><div id="severityBars" class="hidden"></div></section>
+      <section class="panel"><div class="panel-head"><div><div class="eyebrow">INFRASTRUCTURE</div><h3>Service health</h3></div><button class="text-btn" id="checkBtn">CHECK NOW ↗</button></div><div class="service-list" id="serviceList"><div class="empty">Vérification des services…</div></div></section></div>
+      <section class="panel recent-panel"><div class="panel-head"><div><div class="eyebrow">LATEST FINDINGS</div><h3>Recent vulnerabilities</h3></div><button class="text-btn" data-goto="vulnerabilities">VIEW ALL ↗</button></div><div class="table-wrap"><table><thead><tr><th>VULNERABILITY</th><th>RISK</th><th>CWE</th><th>URL</th></tr></thead><tbody id="recentRows"><tr><td colspan="4" class="empty">Aucune donnée chargée.</td></tr></tbody></table></div></section>
+      <section class="panel patch-panel"><div class="panel-head"><div><div class="eyebrow">REMEDIATION</div><h3>Recommandations de patch</h3></div></div><ul id="patchList" class="patch-list"></ul></section>
+      <div class="scan-status" id="scanStatus">Aucun scan lancé depuis HAKATSUKI.</div>
+    </section>
+    <section id="vulnerabilitiesView" class="view hidden"><div class="section-head"><div><div class="eyebrow">DETECTION RESULTS</div><h3>Vulnerability register</h3><p class="muted">Données lues depuis <code>output/alertes.json</code>.</p></div><div class="filters"><input id="searchInput" placeholder="Rechercher une alerte…"><select id="riskFilter"><option value="all">Tous les risques</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Informational</option></select></div></div><section class="panel"><div class="table-wrap"><table><thead><tr><th>ALERT</th><th>RISK</th><th>CWE</th><th>PLUGIN</th><th>URL</th></tr></thead><tbody id="allRows"><tr><td colspan="5" class="empty">Chargement…</td></tr></tbody></table></div></section><p class="muted tiny">Sélectionne une ligne pour afficher les détails et demander une analyse locale à Ollama.</p><div id="detailPanel" class="panel detail-panel hidden"></div></section>
+    <section id="assistantView" class="view hidden"><div class="section-head"><div><div class="eyebrow">LOCAL LANGUAGE MODEL</div><h3>AI Security Analysis</h3><p class="muted">Analyse à la demande via Ollama. Aucune génération automatique en arrière-plan.</p></div><span class="mini-tag">CPU CONSERVATION MODE</span></div><div class="ai-layout"><section class="panel ai-intro"><div class="ai-emblem">✳</div><h3>Security intelligence</h3><p>Choisis une vulnérabilité dans le registre, puis lance une analyse. Le modèle doit être installé localement et le serveur Ollama actif.</p><div class="model-line"><span class="live-dot"></span><span id="modelState">Vérification du modèle…</span></div></section><section class="panel ai-result"><div class="panel-head"><div><div class="eyebrow">ANALYSIS OUTPUT</div><h3>Remediation insight</h3></div></div><div id="aiOutput" class="ai-output">Aucune analyse lancée. Ouvre Vulnerabilities et sélectionne une alerte pour commencer.</div><div class="ai-actions"><button id="analyzeBtn" class="primary" disabled>✳ ANALYSER L'ALERTE SÉLECTIONNÉE</button></div></section></div></section>
+    <section id="knowledgeView" class="view hidden">
+      <div class="section-head"><div><div class="eyebrow">OWASP KNOWLEDGE BASE</div><h3>RAG Security Assistant</h3><p class="muted">Recherche sémantique dans les fiches OWASP indexées dans ChromaDB. Les extraits sont affichés avec leur fichier source.</p></div><span class="mini-tag" id="ragState">Vérification ChromaDB…</span></div>
+      <section class="panel rag-panel"><label for="ragQuestion">QUESTION DE SÉCURITÉ</label><textarea id="ragQuestion" rows="3" placeholder="Ex. : How to prevent SQL injection?"></textarea><div class="ai-actions"><button id="ragAskBtn" class="primary">⌕ RECHERCHER DANS OWASP</button></div></section>
+      <div id="ragResults" class="rag-results"><section class="panel empty">Pose une question pour retrouver les passages OWASP pertinents.</section></div>
+    </section>
+    <footer>HAKATSUKI <span>•</span> LOCAL DEFENSIVE SECURITY TOOL <span>•</span> ALERT → PATCH</footer>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
