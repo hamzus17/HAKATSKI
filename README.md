@@ -17,7 +17,7 @@ Un scanner produit des dizaines d'alertes techniques, souvent répétées, sans 
 | Scan de la cible avec OWASP ZAP (mode daemon) et export `alertes.json` | ✅ Fonctionnel (scan passif ; scan actif en option) |
 | Dashboard web HAKATSUKI (alertes, services, dernier scan, recherche OWASP) | ✅ Fonctionnel |
 | Agent IA : explication et correctif par type d'alerte (RAG + LLM local) | ✅ Fonctionnel |
-| Rapport HTML/PDF et export SARIF | 📝 Prévu |
+| Rapport HTML/PDF et export SARIF | ✅ Fonctionnel |
 
 Les correctifs proposés par une IA **doivent toujours être vérifiés par une personne**.
 
