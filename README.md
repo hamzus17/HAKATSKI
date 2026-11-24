@@ -32,24 +32,7 @@ Cible (Juice Shop) → ZAP → alertes.json
 ```
 ## Architecture du pipeline
 
-Le flux automatise l'analyse dynamique (DAST), l'enrichissement contextuel local par RAG et la génération de sorties exploitables :
-
-```text
-Cible (OWASP Juice Shop)
-        │
-        ▼ (Scan DAST)
-  OWASP ZAP ──► alertes.json
-                       │
-                       ▼
-      ┌────────────────────────────────────────┐
-      │                AGENT                   │
-      │  1. Regroupement & déduplication       │
-      │  2. Recherche RAG ─────────────────────┼──► ChromaDB (CWE / OWASP / Patches)
-      │  3. Génération & remédiation ──────────┼──► Ollama (LLM local)
-      └────────────────────────────────────────┘
-         │                 │              │
-         ▼                 ▼              ▼
-    Dashboard         Rapport         SARIF
+![Architecture DevSecOps](./data/architecture.jpg)
 ```
 
 ### Rôle des étapes
