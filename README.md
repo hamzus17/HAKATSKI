@@ -30,7 +30,32 @@ Cible (Juice Shop) → ZAP → alertes.json
                                 ↓
                  Dashboard · Rapport · SARIF
 ```
+## Architecture du pipeline
 
+Le flux automatise l'analyse dynamique (DAST), l'enrichissement contextuel local par RAG et la génération de sorties exploitables :
+
+```text
+Cible (OWASP Juice Shop)
+        │
+        ▼ (Scan DAST)
+  OWASP ZAP ──► alertes.json
+                       │
+                       ▼
+      ┌────────────────────────────────────────┐
+      │                AGENT                   │
+      │  1. Regroupement & déduplication       │
+      │  2. Recherche RAG ─────────────────────┼──► ChromaDB (CWE / OWASP / Patches)
+      │  3. Génération & remédiation ──────────┼──► Ollama (LLM local)
+      └────────────────────────────────────────┘
+         │                 │              │
+         ▼                 ▼              ▼
+    Dashboard         Rapport         SARIF
+```
+
+### Rôle des étapes
+* **Collecte (`Juice Shop` → `ZAP` → `alertes.json`) :** Exécution du scan DAST sur la cible et export normalisé des alertes détectées.
+* **Agent (`Regroupement` → `ChromaDB` → `Ollama`) :** Agrégation des alertes similaires, récupération des connaissances pertinentes via recherche vectorielle locale, puis raisonnement et proposition de correctifs via un modèle hébergé localement.
+* **Restitution (`Dashboard` · `Rapport` · `SARIF`) :** Visualisation des résultats, génération d'un rapport d'audit/synthèse et export au format SARIF pour l'intégration outillée.
 ## Technologies
 
 Python 3.12 · ChromaDB · Ollama (`all-minilm` pour les embeddings, `llama3.2:3b` pour la rédaction) · OWASP ZAP 2.17 · OWASP Juice Shop · HTML/CSS/JavaScript · Bash.
