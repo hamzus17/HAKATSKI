@@ -1,0 +1,16 @@
+{
+    "keepSettings": {
+        "type": 1,
+        "amount": 2
+    },
+    "auditFilename": "logs/audit.json",
+    "hashType": "md5",
+    "extension": "",
+    "files": [
+        {
+            "date": 1795101118731,
+            "name": "C:\\dev\\alert-to-patch\\targets\\juice-shop\\juice-shop_20.4.0-SNAPSHOT\\logs\\access.log.2026-11-19",
+            "hash": "3955ef50f217bcc7ec66158dca2be46e"
+        }
+    ]
+}
